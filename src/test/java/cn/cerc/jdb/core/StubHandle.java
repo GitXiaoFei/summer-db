@@ -8,6 +8,8 @@ import cn.cerc.jdb.mysql.SqlConnection;
 import cn.cerc.jdb.mysql.SqlSession;
 import cn.cerc.jdb.oss.OssConnection;
 import cn.cerc.jdb.oss.OssSession;
+import cn.cerc.jdb.pay.wechat.WechatConnection;
+import cn.cerc.jdb.pay.wechat.WechatSession;
 import cn.cerc.jdb.queue.QueueConnection;
 import cn.cerc.jdb.queue.QueueSession;
 
@@ -17,6 +19,7 @@ public class StubHandle implements IHandle {
 	private QueueConnection queConn;
 	private OssConnection ossConn;
 	private JiguangConnection pushConn;
+	private WechatConnection wechatConn;
 
 	public StubHandle() {
 		super();
@@ -42,6 +45,10 @@ public class StubHandle implements IHandle {
 		// Jiguang
 		pushConn = new JiguangConnection();
 		pushConn.setConfig(config);
+
+		// pay
+		wechatConn = new WechatConnection();
+		wechatConn.setConfig(config);
 	}
 
 	@Override
@@ -66,6 +73,8 @@ public class StubHandle implements IHandle {
 			return ossConn.getSession();
 		if (JiguangSession.sessionId.equals(key))
 			return pushConn.getSession();
+		if (WechatSession.sessionId.equals(key))
+			return wechatConn.getSession();
 		return null;
 	}
 
