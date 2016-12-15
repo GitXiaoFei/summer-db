@@ -5,11 +5,14 @@ import java.util.Date;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.pay.wechat.tools.GetWxOrderno;
 import cn.cerc.jdb.pay.wechat.tools.MD5Util;
 import cn.cerc.jdb.pay.wechat.tools.RequestHandler;
+import cn.cerc.jdb.pay.wechat.tools.ResponseHandler;
 import cn.cerc.jdb.pay.wechat.tools.TenpayUtil;
 import net.sf.json.util.JSONUtils;
 
@@ -185,6 +188,33 @@ public class WechatPay {
 		return JSONUtils.valueToString(finalpackage);
 	}
 	
+	/**
+	 *  支付回调验证
+	 * @return
+	 */
+	public boolean notifyValidate(HttpServletRequest request, HttpServletResponse response, Map<String, String> postdata) {
+		try {
+			ResponseHandler resHandler = new ResponseHandler(request, response);
+			resHandler.setKey(session.getApiKey());
+			postdata = resHandler.getSmap();
+			log.info("---------postdata：" + postdata);
+			if (resHandler.isWechatSign() == true) {
+				String trade_state = postdata.get("result_code");
+				if ("SUCCESS".equals(trade_state)) {
+					resHandler.sendToCFT("<xml><return_code><![CDATA[SUCCESS]]></return_code></xml>");
+					return true;
+				} else {
+					log.info("fail -SHA1 failed");
+					resHandler.sendToCFT("<xml><return_code><![CDATA[FAIL]]></return_code></xml>");
+				}
+			} else {
+				log.info("微信支付回调验证签名失败，fail -Md5 failed");
+			}
+		} catch (Exception e) {
+			log.error("微信支付回调验证异常，异常信息：", e);
+		}
+		return false;
+	}
 	
 
 }
