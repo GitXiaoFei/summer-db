@@ -62,7 +62,11 @@ public class utils {
 	public static String floatToStr(Double stockNum) {
 		return stockNum + "";
 	}
-
+	/**
+	 * 生成随机数 GUID
+	 * @author 林俐俊
+	 * @Time 2017-4-28 15:23
+	 */
 	public static String newGuid() {
 		UUID uuid = UUID.randomUUID();
 		return '{' + uuid.toString() + '}';

@@ -5,6 +5,12 @@ public class SyncDataSet {
 	private DataSet target;
 	private String keyFields;
 
+	/**
+	 * 同步data的数据
+	 * @author 林俐俊
+	 * @Time 2017-4-28 16:42
+	 * @param source target keyFields (参数不清楚)
+	 */
 	public SyncDataSet(DataSet source, DataSet target, String keyFields) {
 		this.source = source;
 		this.target = target;

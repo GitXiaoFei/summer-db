@@ -15,6 +15,7 @@ import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 import cn.cerc.jdb.core.IConfig;
 
 public class Alidayu {
+	//日志文件
 	private static final Logger log = Logger.getLogger(Alidayu.class);
 	// 常量
 	public static final String AppName = "appName";
@@ -46,7 +47,13 @@ public class Alidayu {
 		tpl.put("SMS_1190006", "系统登陆确认验证码"); // 验证码${code}，您正在登录${product}，若非本人操作，请勿泄露。
 		tpl.put("SMS_1190007", "系统身份验证验证码"); // 验证码${code}，您正在进行${product}身份验证，打死不要告诉别人哦！
 	}
-
+	
+	/**
+	 * 连接参数配置
+	 * @author 林俐俊
+	 * @Time 2017-4-28 14:09
+	 * @param conf(各类设置)
+	 */
 	public Alidayu(IConfig conf) {
 		this.appName = conf.getProperty(AppName, "none");
 		this.serverUrl = conf.getProperty(ServerUrl, "http://gw.api.taobao.com/router/rest");
@@ -54,7 +61,13 @@ public class Alidayu {
 		this.appSecret = conf.getProperty(AppSecret);
 		this.signName = conf.getProperty(SingName, "地藤");
 	}
-
+	
+	/**
+	 * 连接-阿里大鱼
+	 * @author 林俐俊
+	 * @Time 2017-4-28 14:09
+	 * @return boolean (成功返回TRUE,失败返回FALSE)
+	 */
 	public boolean send(String corpNo, Object data) {
 		AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
 		req.setRecNum(mobileNo);

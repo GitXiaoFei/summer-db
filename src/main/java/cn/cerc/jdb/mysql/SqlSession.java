@@ -16,7 +16,7 @@ public class SqlSession implements ISession {
 	public static final String rds_password = "rds.password";
 	// IHandle中识别码
 	public static String sessionId = "sqlSession";
-
+	//日志文件
 	private static final Logger log = Logger.getLogger(SqlSession.class);
 	private Connection connection;
 	private int tag;
