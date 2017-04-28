@@ -19,6 +19,11 @@ public class JiguangConnection implements IConnection {
 		return config;
 	}
 
+	/**
+	 * 初始化
+	 * @author 林俐俊
+	 * @Time 2017-4-28 17:12
+	 */
 	@Override
 	public void init() {
 		if (session == null) {

@@ -27,6 +27,12 @@ public class NasQuery extends DataQuery {
 		this.handle = handle;
 	}
 
+	/**
+	 * 查询文件 并打开
+	 * @author 林俐俊
+	 * @Time 2017-4-28 17:36
+	 * @return 当前对象
+	 */
 	@Override
 	public DataQuery open() {
 		try {

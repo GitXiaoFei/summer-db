@@ -15,11 +15,23 @@ public class CacheConnection implements IConnection {
 	private static SockIOPool pool;
 	// private static int count = 0;
 
+	/**
+	 * 方法重写-设置连接
+	 * @author 林俐俊
+	 * @Time 2017-4-28 14:32
+	 * @param config
+	 */
 	@Override
 	public void setConfig(IConfig config) {
 		this.config = config;
 	}
 
+	/**
+	 * 方法重写-返回会话
+	 * @author 林俐俊
+	 * @Time 2017-4-28 14:32
+	 * @param sess
+	 */	
 	@Override
 	public CacheSession getSession() {
 		init();
@@ -28,10 +40,21 @@ public class CacheConnection implements IConnection {
 		return sess;
 	}
 
+	/**
+	 * 获取配置
+	 * @author 林俐俊
+	 * @Time 2017-4-28 14:32
+	 */
 	public IConfig getConfig() {
 		return config;
 	}
 
+	/**
+	 * 方法重写-初始化
+	 * @author 林俐俊
+	 * @Time 2017-4-28 14:32
+	 * @param sess
+	 */	
 	@Override
 	public void init() {
 		if (pool == null && config != null) {

@@ -26,6 +26,11 @@ public class CustomDataSet implements IRecord, Iterable<Record> {
 	private DataSetEvent onBeforePost;
 	private SearchDataSet search;
 
+	/**
+	 * 数据库操作-添加
+	 * @author 林俐俊
+	 * @Time 2017-4-28 15:31
+	 */
 	public CustomDataSet append() {
 		if (search != null)
 			search.clear();
@@ -38,7 +43,12 @@ public class CustomDataSet implements IRecord, Iterable<Record> {
 			onAfterAppend.execute(this);
 		return this;
 	}
-
+	
+	/**
+	 * 数据库操作-修改
+	 * @author 林俐俊
+	 * @Time 2017-4-28 15:31
+	 */
 	public void edit() {
 		if (bof() || eof())
 			throw new RuntimeException("当前记录为空，无法修改");
@@ -47,6 +57,11 @@ public class CustomDataSet implements IRecord, Iterable<Record> {
 		this.getCurrent().setState(DataSetState.dsEdit);
 	}
 
+	/**
+	 * 数据库操作-删除
+	 * @author 林俐俊
+	 * @Time 2017-4-28 15:31
+	 */
 	public void delete() {
 		if (bof() || eof())
 			throw new RuntimeException("当前记录为空，无法修改");
@@ -58,6 +73,11 @@ public class CustomDataSet implements IRecord, Iterable<Record> {
 		return;
 	}
 
+	/**
+	 * 数据库操作-提交
+	 * @author 林俐俊
+	 * @Time 2017-4-28 15:31
+	 */
 	public void post() {
 		if (search != null)
 			search.clear();
@@ -98,10 +118,20 @@ public class CustomDataSet implements IRecord, Iterable<Record> {
 		return this.recNo == 0;
 	}
 
+	/**
+	 * 判断是否有值
+	 * @author 林俐俊
+	 * @Time 2017-4-28 15:31
+	 */
 	public boolean eof() {
 		return this.records.size() == 0 || this.recNo > this.records.size();
 	}
 
+	/**
+	 * 获取一行数据
+	 * @author 林俐俊
+	 * @Time 2017-4-28 15:31
+	 */
 	public Record getCurrent() {
 		if (this.eof()) {
 			throw DelphiException.createFmt("[%s]eof == true", this.getClass().getName());
@@ -183,6 +213,12 @@ public class CustomDataSet implements IRecord, Iterable<Record> {
 		return this.getCurrent().getState();
 	}
 
+	/**
+	 * 根据数据库字段获取 数据
+	 * @author 林俐俊
+	 * @Time 2017-4-28 15:31
+	 * @param 数据库列名
+	 */
 	public Object getField(String field) {
 		return this.getCurrent().getField(field);
 	}

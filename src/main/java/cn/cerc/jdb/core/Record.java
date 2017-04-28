@@ -251,7 +251,12 @@ public class Record implements IRecord, Serializable {
 			return false;
 		}
 	}
-
+	/**
+	 * 获取int类型 字段值
+	 * @author 林俐俊
+	 * @Time 2017-4-28 15:35
+	 * @param field 数据库中列名
+	 */
 	@Override
 	public int getInt(String field) {
 		if (!defs.exists(field))
@@ -276,7 +281,13 @@ public class Record implements IRecord, Serializable {
 			return 0;
 		}
 	}
-
+	
+	/**
+	 * 获取double类型 字段值
+	 * @author 林俐俊
+	 * @Time 2017-4-28 15:42
+	 * @param field 数据库中列名
+	 */
 	@Override
 	public double getDouble(String field) {
 		if (!defs.exists(field))
@@ -306,6 +317,12 @@ public class Record implements IRecord, Serializable {
 		}
 	}
 
+	/**
+	 * 获取double类型 字段值 保留小数点后几位
+	 * @author 林俐俊
+	 * @Time 2017-4-28 15:51
+	 * @param field 数据库中列名  digit 保留小数点后几位数
+	 */
 	public double getDouble(String field, int digit) {
 		double result = this.getDouble(field);
 		String str = "0.00000000";
@@ -314,6 +331,12 @@ public class Record implements IRecord, Serializable {
 		return Double.parseDouble(df.format(result));
 	}
 
+	/**
+	 * 获取字符串类型 字段值
+	 * @author 林俐俊
+	 * @Time 2017-4-28 16:01
+	 * @param field 数据库中列名
+	 */
 	@Override
 	public String getString(String field) {
 		if (field == null)
@@ -336,6 +359,12 @@ public class Record implements IRecord, Serializable {
 		return result;
 	}
 
+	/**
+	 * 获取froms类中传过来的值
+	 * @author 林俐俊
+	 * @Time 2017-4-28 16:21
+	 * @param field froms中的名称
+	 */
 	public String getSafeString(String field) {
 		return safeString(getString(field));
 	}
@@ -383,7 +412,13 @@ public class Record implements IRecord, Serializable {
 	public boolean exists(String field) {
 		return this.defs.exists(field);
 	}
-
+	
+	/**
+	 * 判断是否有值存在
+	 * @author 林俐俊
+	 * @Time 2017-4-28 16:31
+	 * @param field 传值的name名
+	 */
 	public boolean hasValue(String field) {
 		return defs.exists(field) && !"".equals(getString(field));
 	}

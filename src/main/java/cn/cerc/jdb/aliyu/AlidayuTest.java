@@ -9,6 +9,11 @@ import cn.cerc.jdb.core.IConfig;
 
 public class AlidayuTest {
 
+	/**
+	 * Alidayu test测试
+	 * @author 林俐俊
+	 * @Time 2017-4-28 14:12
+	 */
 	@Test
 	@Ignore
 	public void test() {

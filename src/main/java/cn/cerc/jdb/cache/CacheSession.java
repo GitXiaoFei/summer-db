@@ -12,6 +12,10 @@ public class CacheSession implements ISession, IMemcache {
 	public static final String sessionId = "cacheSession";
 	private MemCachedClient client;
 
+	/**关闭会话
+	 * @author 林俐俊
+	 * @Time 2017-4-28 14:42
+	 */
 	@Override
 	public void closeSession() {
 		if (client != null)

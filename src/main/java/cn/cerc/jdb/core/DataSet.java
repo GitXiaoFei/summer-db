@@ -43,7 +43,11 @@ public class DataSet extends CustomDataSet implements Serializable {
 			head = new Record(head_defs);
 		return head;
 	}
-
+	/**
+	 * 获取JSON
+	 * @author 林俐俊
+	 * @Time 2017-4-28 15:31
+	 */
 	public String getJSON() {
 		return this.getJSON(0, this.size() - 1);
 	}
